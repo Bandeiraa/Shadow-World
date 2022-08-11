@@ -1,5 +1,5 @@
 extends Control
-class_name MainContainer
+class_name QuestContainer
 
 onready var animation: AnimationPlayer = get_node("Animation")
 

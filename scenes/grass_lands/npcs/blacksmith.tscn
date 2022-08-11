@@ -879,7 +879,7 @@ texture = ExtResource( 1 )
 position = Vector2( 167, 48 )
 frames = SubResource( 26 )
 animation = "idle"
-frame = 13
+frame = 1
 playing = true
 
 [node name="Wall" type="Sprite" parent="Art"]
@@ -898,7 +898,7 @@ position = Vector2( 18, -82 )
 z_index = 2
 frames = SubResource( 43 )
 animation = "white_type_2"
-frame = 18
+frame = 7
 playing = true
 
 [node name="Bottom" type="AnimatedSprite" parent="Art/Forge"]
@@ -906,6 +906,7 @@ position = Vector2( 18, 47 )
 z_index = -1
 frames = SubResource( 9 )
 animation = "off"
+frame = 4
 playing = true
 
 [node name="Animation" type="AnimationPlayer" parent="Art/Forge"]
@@ -916,7 +917,7 @@ anims/white_type_2 = SubResource( 105 )
 
 [node name="Npc" type="Node2D" parent="Art"]
 script = ExtResource( 21 )
-dialog = [ "Hello, Adventurer...", "How can I help you?" ]
+dialog = [ "Olá, aventureiro...", "Precisa de algo?" ]
 
 [node name="Anvil" type="AnimatedSprite" parent="Art/Npc"]
 position = Vector2( 72, 105 )
@@ -928,6 +929,7 @@ playing = true
 position = Vector2( 73, 85 )
 frames = SubResource( 127 )
 animation = "animation_2"
+frame = 4
 playing = true
 
 [node name="InteractArea" type="Area2D" parent="Art/Npc"]
@@ -958,7 +960,6 @@ position = Vector2( 65, 71 )
 z_index = -1
 frames = SubResource( 155 )
 animation = "idle"
-frame = 4
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]

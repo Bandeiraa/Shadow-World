@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sidebar_container.png-91d5d6ebcec8aadd8b1991c7b1408b5c.stex"
+path="res://.import/quest_separation.png-65ce7b8a5bcca151c9a4054614c9f4b0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/general/sidebar_container.png"
-dest_files=[ "res://.import/sidebar_container.png-91d5d6ebcec8aadd8b1991c7b1408b5c.stex" ]
+source_file="res://assets/interface/quest/quest_separation.png"
+dest_files=[ "res://.import/quest_separation.png-65ce7b8a5bcca151c9a4054614c9f4b0.stex" ]
 
 [params]
 
