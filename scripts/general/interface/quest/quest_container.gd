@@ -41,6 +41,8 @@ func on_animation_finished(anim_name: String) -> void:
 		"hide_container":
 			on_action = false
 			display_placeholder_text()
+			get_tree().call_group("character", "sleep", true)
 			
 		"show_container":
 			on_action = true
+			get_tree().call_group("character", "sleep", false)

@@ -58,7 +58,7 @@ func _process(_delta: float) -> void:
 	
 	
 func break_condition() -> bool:
-	if not Input.is_action_just_pressed("interact") or not can_interact:
+	if not Input.is_action_just_pressed("ui_interact") or not can_interact:
 		return false
 		
 	return true

@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 	
 	
 func interact() -> void:
-	if Input.is_action_just_pressed("interact") and not is_interacting:
+	if Input.is_action_just_pressed("ui_interact") and not is_interacting:
 		player.sleep(false)
 		is_interacting = true
 		get_tree().call_group("gui", "select_container", self, "dialog", info_list)

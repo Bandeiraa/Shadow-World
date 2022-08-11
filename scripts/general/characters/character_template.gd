@@ -29,7 +29,7 @@ func get_direction() -> Vector2:
 	
 	
 func attack() -> void:
-	if Input.is_action_just_pressed("attack") and not texture.in_action:
+	if Input.is_action_just_pressed("ui_attack") and not texture.in_action:
 		can_move = false
 		texture.action_behavior("attack", stats.current_attack)
 		

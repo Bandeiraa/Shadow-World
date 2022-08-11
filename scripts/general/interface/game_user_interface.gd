@@ -27,10 +27,10 @@ func _process(_delta: float) -> void:
 	
 func handle_quest_container() -> void:
 	var on_action: bool = quest_container.on_action
-	if Input.is_action_just_pressed("quest_container") and not on_action:
+	if Input.is_action_just_pressed("ui_quest") and not on_action:
 		quest_container.play_animation("show_container")
 		return
 		
-	if Input.is_action_just_pressed("quest_container") and on_action:
+	if Input.is_action_just_pressed("ui_quest") and on_action:
 		quest_container.play_animation("hide_container")
 		return
