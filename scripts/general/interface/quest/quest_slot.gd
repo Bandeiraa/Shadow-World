@@ -1,9 +1,15 @@
 extends TextureRect
 class_name QuestSlot
 
+signal send_quest_info
+
+onready var slot_index: int = get_index()
+onready var quest_name_label: Label = get_node("QuestName")
+
 var quest_name: String = ""
 var quest_description: String = ""
 
+var is_empty: bool = true
 var can_click: bool = false
 
 func _ready() -> void:
@@ -21,6 +27,13 @@ func mouse_interaction(state: String) -> void:
 		can_click = false
 		
 		
+func update_slot(slot_quest_name: String, slot_quest_description: String) -> void:
+	quest_name_label.text = slot_quest_name
+	
+	quest_name = slot_quest_name
+	quest_description = slot_quest_description
+	
+	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_click") and can_click:
-		pass
+		emit_signal("send_quest_info", quest_name, quest_description)
