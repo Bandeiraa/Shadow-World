@@ -3,23 +3,56 @@ class_name Dialog
 
 signal end_dialog
 
+enum QUEST_INFO {
+	QUEST_NAME,
+	QUEST_DESCRIPTION
+}
+
+enum LIST_INFO {
+	DIALOG,
+	SHOW_BUTTON,
+	FIRST_BUTTON_TEXT,
+	SECOND_BUTTON_TEXT,
+	END_DIALOG,
+	STATE
+}
+
+onready var choice_container: VBoxContainer = get_node("Background/ChoiceContainer")
+
+onready var first_choice: Label = choice_container.get_node("FirstChoiceText")
+onready var second_choice: Label = choice_container.get_node("SecondChoiceText")
+
 onready var faceset: TextureRect = get_node("Background/Faceset")
 onready var dialog_label: RichTextLabel = get_node("Background/Text")
 
+var choice_index: int = -1
+
 var dialog_index: int = 0
+
+var can_click: bool = false
 var can_interact: bool = false
+var can_kill_dialog: bool = false
 
 var dialog_dictionary: Dictionary = {
 	"faceset": {},
-	"dialog": []
+	"dialog": [],
+	"quest_info": []
 }
 
+func _ready() -> void:
+	for choice_slot in choice_container.get_children():
+		choice_slot.connect("mouse_exited", self, "mouse_interaction", [choice_slot, "exited"])
+		choice_slot.connect("mouse_entered", self, "mouse_interaction", [choice_slot, "entered"])
+		
+		
 func set_info(info_list: Array) -> void:
 	var faceset_info: Dictionary = info_list[0]
 	var dialog_info: Array = info_list[1]
+	var quest_info: Array = info_list[2]
 	
 	dialog_dictionary["faceset"] = faceset_info
 	dialog_dictionary["dialog"] = dialog_info
+	dialog_dictionary["quest_info"] = quest_info
 	
 	set_texture("idle")
 	update_text()
@@ -29,9 +62,23 @@ func update_text() -> void:
 	can_interact = false
 	
 	set_texture("speak")
-	dialog_label.percent_visible = 0
-	dialog_label.text = dialog_dictionary["dialog"][dialog_index]
 	
+	var dialog_list: Array = dialog_dictionary["dialog"][dialog_index]
+	
+	dialog_label.percent_visible = 0
+	dialog_label.text = dialog_list[LIST_INFO.DIALOG]
+	
+	if dialog_list[LIST_INFO.SHOW_BUTTON]:
+		can_kill_dialog = true
+		choice_container.show()
+		first_choice.text = dialog_list[LIST_INFO.FIRST_BUTTON_TEXT]
+		second_choice.text = dialog_list[LIST_INFO.SECOND_BUTTON_TEXT]
+		
+		can_interact = true
+		set_texture("idle")
+		
+		return
+		
 	while dialog_label.percent_visible < 1:
 		dialog_label.percent_visible += get_process_delta_time() 
 		yield(get_tree(), "idle_frame")
@@ -45,15 +92,65 @@ func set_texture(new_state: String) -> void:
 	
 	
 func _process(_delta: float) -> void:
+	if can_click and Input.is_action_just_pressed("ui_click"):
+		check_choice()
+		return
+		
 	if not break_condition():
 		return
 		
-	if dialog_index + 1 < dialog_dictionary["dialog"].size():
-		dialog_index += 1
-		update_text()
+	if can_kill_dialog:
+		end_dialog(false)
 		return
 		
-	emit_signal("end_dialog")
+	if dialog_index + 1 < dialog_dictionary["dialog"].size():
+		update_dialog()
+		return
+		
+	end_dialog(false)
+	
+	
+func check_choice() -> void:
+	var dialog_list: Array = dialog_dictionary["dialog"][dialog_index]
+	
+	var end_dialog_list: Array = dialog_list[LIST_INFO.STATE]
+	var dialog_state: String = end_dialog_list[0]
+	var _index: int = end_dialog_list[1]
+	
+	if dialog_list[LIST_INFO.END_DIALOG] and _index == choice_index:
+		match dialog_state:
+			"quest":
+				var quest_info: Array = dialog_dictionary["quest_info"]
+				var quest_name: String = quest_info[QUEST_INFO.QUEST_NAME]
+				var quest_description: String = quest_info[QUEST_INFO.QUEST_DESCRIPTION]
+				
+				get_tree().call_group("gui", "populate_quest_slot", quest_name, quest_description)
+				end_dialog(true)
+				return
+				
+			"market":
+				end_dialog(false)
+				return
+				
+	if dialog_index + 1 == dialog_dictionary["dialog"].size():
+		end_dialog(false)
+		return
+		
+	choice_container.hide()
+	
+	can_click = false
+	can_kill_dialog = false
+	
+	update_dialog()
+	
+	
+func update_dialog() -> void:
+	dialog_index += 1
+	update_text()
+	
+	
+func end_dialog(quest_state: bool) -> void:
+	emit_signal("end_dialog", quest_state)
 	queue_free()
 	
 	
@@ -62,3 +159,16 @@ func break_condition() -> bool:
 		return false
 		
 	return true
+	
+	
+func mouse_interaction(slot: Label, state: String) -> void:
+	match state:
+		"entered":
+			can_click = true
+			slot.modulate.a = 0.5
+			choice_index = slot.get_index()
+			
+		"exited":
+			choice_index = -1
+			can_click = false
+			slot.modulate.a = 1.0

@@ -46,7 +46,7 @@ func update_display_text(slot_quest_name: String, slot_quest_description: String
 func populate_quest_slot(slot_quest_name: String, slot_quest_description: String) -> void:
 	for slot in quest_v_container.get_children():
 		if slot.is_empty:
-			slot.upate_slot(slot_quest_name, slot_quest_description)
+			slot.update_slot(slot_quest_name, slot_quest_description)
 			return
 			
 			

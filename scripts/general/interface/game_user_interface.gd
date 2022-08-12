@@ -34,3 +34,7 @@ func handle_quest_container() -> void:
 	if Input.is_action_just_pressed("ui_quest") and on_action:
 		quest_container.play_animation("hide_container")
 		return
+		
+		
+func populate_quest_slot(quest_name: String, quest_description: String) -> void:
+	quest_container.populate_quest_slot(quest_name, quest_description)

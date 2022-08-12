@@ -28,6 +28,8 @@ func mouse_interaction(state: String) -> void:
 		
 		
 func update_slot(slot_quest_name: String, slot_quest_description: String) -> void:
+	is_empty = false
+	
 	quest_name_label.text = slot_quest_name
 	
 	quest_name = slot_quest_name
@@ -35,5 +37,5 @@ func update_slot(slot_quest_name: String, slot_quest_description: String) -> voi
 	
 	
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_click") and can_click:
+	if Input.is_action_just_pressed("ui_click") and can_click and not is_empty:
 		emit_signal("send_quest_info", quest_name, quest_description)
