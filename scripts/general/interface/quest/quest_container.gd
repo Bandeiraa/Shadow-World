@@ -69,9 +69,15 @@ func on_animation_finished(anim_name: String) -> void:
 	match anim_name:
 		"hide_container":
 			on_action = false
+			reset_slot_state()
 			display_placeholder_text()
 			get_tree().call_group("character", "sleep", true)
 			
 		"show_container":
 			on_action = true
 			get_tree().call_group("character", "sleep", false)
+			
+			
+func reset_slot_state() -> void:
+	for slot in quest_v_container.get_children():
+		slot.reset_state()

@@ -64,3 +64,8 @@ func _process(_delta: float) -> void:
 			quest_goal,
 			quest_current_state
 		)
+		
+		
+func reset_state() -> void:
+	modulate.a = 1.0
+	can_click = false

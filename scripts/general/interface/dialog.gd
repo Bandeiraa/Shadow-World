@@ -112,6 +112,8 @@ func _process(_delta: float) -> void:
 	
 	
 func check_choice() -> void:
+	reset_mouse_state()
+	
 	var dialog_list: Array = dialog_dictionary["dialog"][dialog_index]
 	
 	var end_dialog_list: Array = dialog_list[LIST_INFO.STATE]
@@ -174,3 +176,8 @@ func mouse_interaction(slot: Label, state: String) -> void:
 			choice_index = -1
 			can_click = false
 			slot.modulate.a = 1.0
+			
+			
+func reset_mouse_state() -> void:
+	for button in choice_container.get_children():
+		button.modulate.a = 1.0
