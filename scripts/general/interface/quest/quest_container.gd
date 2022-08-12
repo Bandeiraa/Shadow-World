@@ -7,6 +7,10 @@ onready var left_container: TextureRect = get_node("LeftContainer")
 onready var quest_name: Label = left_container.get_node("VContainer/QuestName")
 onready var quest_description: Label = left_container.get_node("VContainer/QuestDescription")
 
+onready var quest_goal: Label = left_container.get_node("VContainer/VContainer/Goal")
+onready var quest_type: Label = left_container.get_node("VContainer/VContainer/QuestType")
+onready var quest_current_state: Label = left_container.get_node("VContainer/VContainer/CurrentState")
+
 onready var right_container: TextureRect = get_node("RightSidebar")
 onready var quest_v_container: VBoxContainer = right_container.get_node("QuestContainer/Container/VContainer")
 
@@ -37,16 +41,23 @@ func display_placeholder_text() -> void:
 	quest_name.text = roleplay_name_list[random_index]
 	quest_description.text = roleplay_description_list[random_index]
 	
+	quest_goal.text = ""
+	quest_type.text = ""
+	quest_current_state.text = ""
 	
-func update_display_text(slot_quest_name: String, slot_quest_description: String) -> void:
+	
+func update_display_text(slot_quest_name: String, slot_quest_description: String, slot_quest_type: String, slot_quest_goal: String, slot_quest_current_state: String) -> void:
 	quest_name.text = slot_quest_name
 	quest_description.text = slot_quest_description
+	quest_goal.text = slot_quest_goal
+	quest_type.text = slot_quest_type
+	quest_current_state.text = slot_quest_current_state
 	
 	
-func populate_quest_slot(slot_quest_name: String, slot_quest_description: String) -> void:
+func populate_quest_slot(slot_quest_name: String, slot_quest_description: String, quest_info: Dictionary) -> void:
 	for slot in quest_v_container.get_children():
 		if slot.is_empty:
-			slot.update_slot(slot_quest_name, slot_quest_description)
+			slot.update_slot(slot_quest_name, slot_quest_description, quest_info)
 			return
 			
 			

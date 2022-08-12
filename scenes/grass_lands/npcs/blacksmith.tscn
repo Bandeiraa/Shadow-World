@@ -879,6 +879,7 @@ texture = ExtResource( 1 )
 position = Vector2( 167, 48 )
 frames = SubResource( 26 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="Wall" type="Sprite" parent="Art"]
@@ -897,7 +898,7 @@ position = Vector2( 18, -82 )
 z_index = 2
 frames = SubResource( 43 )
 animation = "white_type_2"
-frame = 7
+frame = 11
 playing = true
 
 [node name="Bottom" type="AnimatedSprite" parent="Art/Forge"]
@@ -905,7 +906,7 @@ position = Vector2( 18, 47 )
 z_index = -1
 frames = SubResource( 9 )
 animation = "off"
-frame = 3
+frame = 6
 playing = true
 
 [node name="Animation" type="AnimationPlayer" parent="Art/Forge"]
@@ -928,7 +929,7 @@ playing = true
 position = Vector2( 73, 85 )
 frames = SubResource( 127 )
 animation = "animation_2"
-frame = 1
+frame = 2
 playing = true
 
 [node name="InteractArea" type="Area2D" parent="Art/Npc"]
@@ -942,6 +943,7 @@ shape = SubResource( 170 )
 position = Vector2( 9, 100 )
 frames = SubResource( 160 )
 animation = "type_3"
+frame = 3
 playing = true
 
 [node name="SwordContainer" type="Sprite" parent="Art"]
@@ -958,7 +960,7 @@ position = Vector2( 65, 71 )
 z_index = -1
 frames = SubResource( 155 )
 animation = "idle"
-frame = 7
+frame = 2
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]

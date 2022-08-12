@@ -36,9 +36,9 @@ var initial_dialog: Array = [
 		"",
 		true,
 		"Você teria alguma missão?",
-		"Comprar",
+		"Refinar",
 		true,
-		["market", 1]
+		["upgrade", 1]
 	],
 	
 	[
@@ -78,9 +78,45 @@ var initial_dialog: Array = [
 	]
 ]
 
+var alternative_dialog: Array = [
+	[
+		"Olá, aventureiro...", 
+		false, 
+		"", 
+		"",
+		false,
+		["", -1]
+	],
+	
+	[
+		"Precisa de Algo?",
+		false,
+		"",
+		"",
+		false,
+		["", -1]
+	],
+	
+	[
+		"",
+		true,
+		"Refinar",
+		"Sair",
+		true,
+		["upgrade", 0]
+	]
+]
+
 var quest_info: Array = [
 	"Ajudando o Vilarejo!",
-	"O Ferreiro lhe deu uma missão para eliminar alguns monstros que estão atacando a vila!"
+	"O Ferreiro lhe deu uma missão para eliminar alguns monstros que estão atacando a vila!",
+	{
+		"quest_type": "elimination",
+		"quest_info": {
+			"monster_to_kill": "hedgehog",
+			"amount_to_kill": 10
+		}
+	}
 ]
 
 export(Array, String) var dialog
@@ -92,23 +128,37 @@ func _ready() -> void:
 	
 	
 func _process(_delta: float) -> void:
-	if player == null or is_on_quest:
+	if player == null:
 		return
 		
 	interact()
 	
 	
 func interact() -> void:
-	if Input.is_action_just_pressed("ui_interact") and not is_interacting:
+	if is_on_quest and Input.is_action_just_pressed("ui_interact") and not is_interacting:
+		var alternative_list: Array = []
+		alternative_list.append(FACESET)
+		alternative_list.append(alternative_dialog)
+		alternative_list.append([])
+		
 		player.sleep(false)
 		is_interacting = true
+		
+		get_tree().call_group("gui", "select_container", self, "dialog", alternative_list)
+		
+	if not is_on_quest and Input.is_action_just_pressed("ui_interact") and not is_interacting:
+		player.sleep(false)
+		is_interacting = true
+		
 		get_tree().call_group("gui", "select_container", self, "dialog", info_list)
 		
 		
 func end_interact(quest_state: bool) -> void:
+	if not is_on_quest:
+		is_on_quest = quest_state
+		
 	player.sleep(true)
 	is_interacting = false
-	is_on_quest = quest_state
 	
 	
 func on_npc_body_entered(body: CharacterTemplate) -> void:

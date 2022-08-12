@@ -5,7 +5,8 @@ signal end_dialog
 
 enum QUEST_INFO {
 	QUEST_NAME,
-	QUEST_DESCRIPTION
+	QUEST_DESCRIPTION,
+	QUEST_DICTIONARY
 }
 
 enum LIST_INFO {
@@ -123,12 +124,13 @@ func check_choice() -> void:
 				var quest_info: Array = dialog_dictionary["quest_info"]
 				var quest_name: String = quest_info[QUEST_INFO.QUEST_NAME]
 				var quest_description: String = quest_info[QUEST_INFO.QUEST_DESCRIPTION]
+				var quest_dictionary_info: Dictionary = quest_info[QUEST_INFO.QUEST_DICTIONARY]
 				
-				get_tree().call_group("gui", "populate_quest_slot", quest_name, quest_description)
+				get_tree().call_group("gui", "populate_quest_slot", quest_name, quest_description, quest_dictionary_info)
 				end_dialog(true)
 				return
 				
-			"market":
+			"upgrade":
 				end_dialog(false)
 				return
 				
