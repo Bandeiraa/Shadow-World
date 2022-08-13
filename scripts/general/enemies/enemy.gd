@@ -17,6 +17,7 @@ export(int) var distance_threshold
 export(int) var min_damage
 export(int) var max_damage
 
+export(String) var enemy_name
 export(Array, String) var attack_list
 
 func _physics_process(_delta: float) -> void:
@@ -55,5 +56,6 @@ func attack() -> void:
 	
 	
 func kill() -> void:
+	get_tree().call_group("gui", "update_quest_slot", enemy_name)
 	emit_signal("killed")
 	queue_free()

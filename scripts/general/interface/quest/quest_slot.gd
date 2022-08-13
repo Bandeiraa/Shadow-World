@@ -13,6 +13,10 @@ var quest_type: String = ""
 var quest_goal: String = ""
 var quest_current_state: String = ""
 
+var type: String = ""
+var target: String = ""
+
+var amount: int = 0
 var kill_count: int = 0
 
 var is_empty: bool = true
@@ -49,6 +53,10 @@ func update_slot(slot_quest_name: String, slot_quest_description: String, slot_q
 			var amount_to_kill: int = quest_info["amount_to_kill"]
 			var monster_to_kill: String = quest_info["monster_to_kill"]
 			
+			type = _quest_type
+			amount = amount_to_kill
+			target = monster_to_kill
+			
 			quest_type = "Missão do tipo: Eliminação"
 			quest_goal = "Eliminar " + str(amount_to_kill) + " " + monster_to_kill
 			quest_current_state = "Monstros eliminados: " + str(kill_count) + "/" + str(amount_to_kill)
@@ -66,6 +74,13 @@ func _process(_delta: float) -> void:
 		)
 		
 		
+func update_quest_progress() -> void:
+	match type:
+		"elimination":
+			kill_count += 1
+			quest_current_state = "Monstros eliminados: " + str(kill_count) + "/" + str(amount)
+			
+			
 func reset_state() -> void:
 	modulate.a = 1.0
 	can_click = false

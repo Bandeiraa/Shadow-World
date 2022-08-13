@@ -81,3 +81,9 @@ func on_animation_finished(anim_name: String) -> void:
 func reset_slot_state() -> void:
 	for slot in quest_v_container.get_children():
 		slot.reset_state()
+		
+		
+func update_slot(target: String) -> void:
+	for slot in quest_v_container.get_children():
+		if slot.target == target:
+			slot.update_quest_progress()

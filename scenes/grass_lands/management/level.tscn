@@ -357,7 +357,7 @@ format = 1
 tile_data = PoolIntArray( 131087, 0, 0, 131089, 0, 0, 196624, 0, 0, 655361, 1, 0, 851980, 1, 0, 3014663, 1, 0, 3145733, 1, 0, 3407883, 1, 0, 3407886, 1, 0, 3538925, 1, 0, 3473420, 1, 0, 3604458, 1, 0, 3735531, 1, 0, 3735542, 1, 0, 3735551, 1, 0, 3866617, 1, 0 )
 
 [node name="Warrior" parent="LayeredObjects" instance=ExtResource( 7 )]
-position = Vector2( -201, 1555 )
+position = Vector2( 231, 287 )
 
 [node name="Blacksmith" parent="LayeredObjects" instance=ExtResource( 8 )]
 position = Vector2( 203, 163 )

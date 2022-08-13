@@ -452,6 +452,7 @@ move_speed = 90
 distance_threshold = 25
 min_damage = 5
 max_damage = 15
+enemy_name = "hedgehog"
 attack_list = [ "attack_1", "attack_2" ]
 
 [node name="Texture" parent="." index="0"]
