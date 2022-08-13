@@ -4,6 +4,8 @@ class_name CharacterTemplate
 onready var stats: Node = get_node("Stats")
 onready var texture: Sprite = get_node("Texture")
 
+var attack_damage: int
+
 var can_move: bool = true
 
 var velocity: Vector2 = Vector2.ZERO
@@ -31,6 +33,7 @@ func get_direction() -> Vector2:
 func attack() -> void:
 	if Input.is_action_just_pressed("ui_attack") and not texture.in_action:
 		can_move = false
+		attack_damage = stats.get_attack_damage()
 		texture.action_behavior("attack", stats.current_attack)
 		
 		

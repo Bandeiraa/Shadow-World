@@ -33,9 +33,14 @@ func set_character_orientation(direction: float) -> void:
 		
 func action_behavior(action: String) -> void:
 	on_action = true
-	animation.play(action + attack_suffix)
-	set_texture_suffix("/" + action + ".png")
 	parent.set_physics_process(false)
+	set_texture_suffix("/" + action + ".png")
+	
+	if action == "attack_1" or action == "attack_2":
+		animation.play(action + attack_suffix)
+		return
+		
+	animation.play(action)
 	
 	
 func move_behavior(velocity: Vector2) -> void:
@@ -55,6 +60,9 @@ func set_texture_suffix(_texture_suffix: String) -> void:
 func on_animation_finished(anim_name: String) -> void:
 	var action_state: bool = anim_name == "attack_1" + attack_suffix or anim_name == "attack_2" + attack_suffix or anim_name == "hurt"
 	
+	if anim_name == "death":
+		parent.kill()
+		
 	if action_state:
 		on_action = false
 		parent.set_physics_process(true)

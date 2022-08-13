@@ -20,4 +20,8 @@ root_node = NodePath("../..")
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 2 )
 
+[node name="AttackArea" type="Area2D" parent="." groups=["character_attack_area"]]
+
+[node name="Collision" type="CollisionShape2D" parent="AttackArea"]
+
 [connection signal="animation_finished" from="Texture/Animation" to="Texture" method="on_animation_finished"]

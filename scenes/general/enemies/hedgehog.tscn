@@ -485,6 +485,9 @@ position = Vector2( 53, 7 )
 shape = SubResource( 10 )
 disabled = true
 
+[node name="HitboxArea" parent="." index="5"]
+health = 10
+
 [node name="Collision" parent="HitboxArea" index="0"]
 position = Vector2( 0, 22 )
 shape = SubResource( 13 )

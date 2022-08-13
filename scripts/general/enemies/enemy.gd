@@ -50,3 +50,7 @@ func attack() -> void:
 			attack_damage = randi() % min_damage + 1
 			
 	sprite.action_behavior(current_attack)
+	
+	
+func kill() -> void:
+	queue_free()
