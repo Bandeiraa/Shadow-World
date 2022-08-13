@@ -143,6 +143,9 @@ func check_choice() -> void:
 			"quest_finished":
 				dialog_dictionary["npc"].is_quest_finished = true
 				dialog_dictionary["npc"].can_finish_quest = false
+				
+				var quest_info: Array = dialog_dictionary["quest_info"]
+				get_tree().call_group("gui", "reset_quest_slot", quest_info[QUEST_INFO.QUEST_NAME])
 				end_dialog(false)
 				return
 				

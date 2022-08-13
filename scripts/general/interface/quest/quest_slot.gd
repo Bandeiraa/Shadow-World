@@ -98,4 +98,22 @@ func reset_state() -> void:
 	
 	
 func reset_slot() -> void:
-	pass
+	quest_name = ""
+	quest_description = ""
+	
+	quest_type = ""
+	quest_goal = ""
+	quest_current_state = ""
+	
+	type = ""
+	target = ""
+	
+	amount = 0
+	kill_count = 0
+	
+	is_empty = true
+	quest_finished = false
+	
+	npc_ref = null
+	
+	quest_name_label.text = quest_name

@@ -87,3 +87,11 @@ func update_slot(target: String) -> void:
 	for slot in quest_v_container.get_children():
 		if slot.target == target:
 			slot.update_quest_progress()
+			
+			
+func reset_slot(target: String) -> void:
+	for slot in quest_v_container.get_children():
+		if slot.quest_name == target:
+			slot.reset_slot()
+			
+	display_placeholder_text()

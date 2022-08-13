@@ -187,7 +187,7 @@ func interact() -> void:
 		var finish_quest_list: Array = []
 		finish_quest_list.append(FACESET)
 		finish_quest_list.append(finish_quest_dialog)
-		finish_quest_list.append([])
+		finish_quest_list.append(quest_info)
 		finish_quest_list.append(self)
 		
 		player.sleep(false)
