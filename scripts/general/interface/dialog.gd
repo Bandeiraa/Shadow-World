@@ -37,7 +37,8 @@ var can_kill_dialog: bool = false
 var dialog_dictionary: Dictionary = {
 	"faceset": {},
 	"dialog": [],
-	"quest_info": []
+	"quest_info": [],
+	"npc": null
 }
 
 func _ready() -> void:
@@ -50,10 +51,12 @@ func set_info(info_list: Array) -> void:
 	var faceset_info: Dictionary = info_list[0]
 	var dialog_info: Array = info_list[1]
 	var quest_info: Array = info_list[2]
+	var npc: Node2D = info_list[3]
 	
 	dialog_dictionary["faceset"] = faceset_info
 	dialog_dictionary["dialog"] = dialog_info
 	dialog_dictionary["quest_info"] = quest_info
+	dialog_dictionary["npc"] = npc
 	
 	set_texture("idle")
 	update_text()
@@ -127,12 +130,19 @@ func check_choice() -> void:
 				var quest_name: String = quest_info[QUEST_INFO.QUEST_NAME]
 				var quest_description: String = quest_info[QUEST_INFO.QUEST_DESCRIPTION]
 				var quest_dictionary_info: Dictionary = quest_info[QUEST_INFO.QUEST_DICTIONARY]
+				var quest_npc: Node2D = dialog_dictionary["npc"]
 				
-				get_tree().call_group("gui", "populate_quest_slot", quest_name, quest_description, quest_dictionary_info)
+				get_tree().call_group("gui", "populate_quest_slot", quest_name, quest_description, quest_dictionary_info, quest_npc)
 				end_dialog(true)
 				return
 				
 			"upgrade":
+				end_dialog(false)
+				return
+				
+			"quest_finished":
+				dialog_dictionary["npc"].is_quest_finished = true
+				dialog_dictionary["npc"].can_finish_quest = false
 				end_dialog(false)
 				return
 				

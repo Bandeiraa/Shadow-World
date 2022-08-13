@@ -10,6 +10,8 @@ var info_list: Array
 
 var is_on_quest: bool = false
 var is_interacting: bool = false
+var can_finish_quest: bool = false
+var is_quest_finished: bool = false
 
 var player: KinematicBody2D = null
 
@@ -107,6 +109,53 @@ var alternative_dialog: Array = [
 	]
 ]
 
+var finish_quest_dialog: Array = [
+	[
+		"Olá, aventureiro...", 
+		false, 
+		"", 
+		"",
+		false,
+		["", -1]
+	],
+	
+	[
+		"Precisa de Algo?",
+		false,
+		"",
+		"",
+		false,
+		["", -1]
+	],
+	
+	[
+		"",
+		true,
+		"Eliminei os monstros que você pediu!",
+		"Refinar",
+		true,
+		["upgrade", 1]
+	],
+	
+	[
+		"Agradeço muito a sua ajuda, aventureiro!",
+		false,
+		"",
+		"",
+		false,
+		["", -1]
+	],
+	
+	[
+		"",
+		true,
+		"Foi bem fácil!",
+		"Sair",
+		true,
+		["quest_finished", 0]
+	]
+]
+
 var quest_info: Array = [
 	"Ajudando o Vilarejo!",
 	"O Ferreiro lhe deu uma missão para eliminar alguns monstros que estão atacando a vila!",
@@ -119,12 +168,11 @@ var quest_info: Array = [
 	}
 ]
 
-export(Array, String) var dialog
-
 func _ready() -> void:
 	info_list.append(FACESET)
 	info_list.append(initial_dialog)
 	info_list.append(quest_info)
+	info_list.append(self)
 	
 	
 func _process(_delta: float) -> void:
@@ -135,22 +183,34 @@ func _process(_delta: float) -> void:
 	
 	
 func interact() -> void:
-	if is_on_quest and Input.is_action_just_pressed("ui_interact") and not is_interacting:
+	if can_finish_quest and Input.is_action_just_pressed("ui_interact") and not is_interacting:
+		var finish_quest_list: Array = []
+		finish_quest_list.append(FACESET)
+		finish_quest_list.append(finish_quest_dialog)
+		finish_quest_list.append([])
+		finish_quest_list.append(self)
+		
+		player.sleep(false)
+		is_interacting = true
+	
+		get_tree().call_group("gui", "select_container", self, "dialog", finish_quest_list)
+		
+	if (is_on_quest or is_quest_finished) and Input.is_action_just_pressed("ui_interact") and not is_interacting:
 		var alternative_list: Array = []
 		alternative_list.append(FACESET)
 		alternative_list.append(alternative_dialog)
 		alternative_list.append([])
-		
-		player.sleep(false)
-		is_interacting = true
+		alternative_list.append(self)
 		
 		get_tree().call_group("gui", "select_container", self, "dialog", alternative_list)
 		
-	if not is_on_quest and Input.is_action_just_pressed("ui_interact") and not is_interacting:
 		player.sleep(false)
 		is_interacting = true
-		
+	
+	if not is_on_quest and Input.is_action_just_pressed("ui_interact") and not is_interacting:
 		get_tree().call_group("gui", "select_container", self, "dialog", info_list)
+		player.sleep(false)
+		is_interacting = true
 		
 		
 func end_interact(quest_state: bool) -> void:

@@ -54,10 +54,10 @@ func update_display_text(slot_quest_name: String, slot_quest_description: String
 	quest_current_state.text = slot_quest_current_state
 	
 	
-func populate_quest_slot(slot_quest_name: String, slot_quest_description: String, quest_info: Dictionary) -> void:
+func populate_quest_slot(slot_quest_name: String, slot_quest_description: String, quest_info: Dictionary, quest_npc: Node2D) -> void:
 	for slot in quest_v_container.get_children():
 		if slot.is_empty:
-			slot.update_slot(slot_quest_name, slot_quest_description, quest_info)
+			slot.update_slot(slot_quest_name, slot_quest_description, quest_info, quest_npc)
 			return
 			
 			

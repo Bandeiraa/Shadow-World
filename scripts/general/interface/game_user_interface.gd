@@ -41,8 +41,8 @@ func handle_quest_container() -> void:
 		return
 		
 		
-func populate_quest_slot(quest_name: String, quest_description: String, quest_info: Dictionary) -> void:
-	quest_container.populate_quest_slot(quest_name, quest_description, quest_info)
+func populate_quest_slot(quest_name: String, quest_description: String, quest_info: Dictionary, quest_npc: Node2D) -> void:
+	quest_container.populate_quest_slot(quest_name, quest_description, quest_info, quest_npc)
 	
 	
 func update_quest_slot(target: String) -> void:

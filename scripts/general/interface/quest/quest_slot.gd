@@ -21,6 +21,9 @@ var kill_count: int = 0
 
 var is_empty: bool = true
 var can_click: bool = false
+var quest_finished: bool = false
+
+var npc_ref: Node2D = null
 
 func _ready() -> void:
 	var _exited: bool = connect("mouse_exited", self, "mouse_interaction", ["exited"])
@@ -37,8 +40,9 @@ func mouse_interaction(state: String) -> void:
 		can_click = false
 		
 		
-func update_slot(slot_quest_name: String, slot_quest_description: String, slot_quest_info: Dictionary) -> void:
+func update_slot(slot_quest_name: String, slot_quest_description: String, slot_quest_info: Dictionary, slot_quest_npc: Node2D) -> void:
 	is_empty = false
+	npc_ref = slot_quest_npc
 	
 	quest_name_label.text = slot_quest_name
 	
@@ -75,12 +79,23 @@ func _process(_delta: float) -> void:
 		
 		
 func update_quest_progress() -> void:
+	if quest_finished:
+		return
+		
 	match type:
 		"elimination":
 			kill_count += 1
+			if kill_count == amount:
+				quest_finished = true
+				npc_ref.can_finish_quest = true
+				
 			quest_current_state = "Monstros eliminados: " + str(kill_count) + "/" + str(amount)
 			
 			
 func reset_state() -> void:
 	modulate.a = 1.0
 	can_click = false
+	
+	
+func reset_slot() -> void:
+	pass
