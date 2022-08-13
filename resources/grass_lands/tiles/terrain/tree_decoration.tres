@@ -4,10 +4,10 @@
 [ext_resource path="res://resources/grass_lands/animated_textures/tree/type_2.tres" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 40, 64, 88, 64, 88, 96, 40, 96 )
+points = PoolVector2Array( 32, 128, 96, 128, 96, 160, 32, 160 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 40, 64, 88, 64, 88, 96, 40, 96 )
+points = PoolVector2Array( 32, 128, 96, 128, 96, 160, 32, 160 )
 
 [resource]
 0/name = "type_1"
