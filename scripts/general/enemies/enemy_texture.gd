@@ -6,7 +6,7 @@ onready var animation: AnimationPlayer = get_node("%Animation")
 
 var on_action: bool = false
 
-var texture_suffix: String
+var texture_suffix: String = "/idle.png"
 var attack_suffix: String = "_right"
 
 export(int) var position_offset

@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Enemy
 
+signal killed
+
 onready var sprite: Sprite = get_node("Texture")
 
 var attack_damage: int
@@ -53,4 +55,5 @@ func attack() -> void:
 	
 	
 func kill() -> void:
+	emit_signal("killed")
 	queue_free()

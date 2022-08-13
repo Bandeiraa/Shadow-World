@@ -83,6 +83,11 @@ _global_script_classes=[ {
 "class": "QuestSlot",
 "language": "GDScript",
 "path": "res://scripts/general/interface/quest/quest_slot.gd"
+}, {
+"base": "Node",
+"class": "Spawn",
+"language": "GDScript",
+"path": "res://scripts/general/management/spawn.gd"
 } ]
 _global_script_class_icons={
 "Blacksmith": "",
@@ -99,7 +104,8 @@ _global_script_class_icons={
 "HedgehogTexture": "",
 "HitboxArea": "",
 "QuestContainer": "",
-"QuestSlot": ""
+"QuestSlot": "",
+"Spawn": ""
 }
 
 [application]
