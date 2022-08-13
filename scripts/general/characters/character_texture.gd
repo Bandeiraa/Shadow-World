@@ -50,5 +50,8 @@ func on_animation_finished(anim_name: String) -> void:
 	in_action = false
 	parent.can_move = true
 	
-	if anim_name == "hurt":
+	if anim_name == "hurt" and not global_info.is_on_menu:
 		parent.set_physics_process(true)
+		
+	if anim_name == "death":
+		parent.kill()

@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/general/enemies/hedgehog_texture.gd"
 }, {
+"base": "Area2D",
+"class": "HitboxArea",
+"language": "GDScript",
+"path": "res://scripts/general/characters/hitbox_area.gd"
+}, {
 "base": "Control",
 "class": "QuestContainer",
 "language": "GDScript",
@@ -92,6 +97,7 @@ _global_script_class_icons={
 "GUI": "",
 "GrassLandsLM": "",
 "HedgehogTexture": "",
+"HitboxArea": "",
 "QuestContainer": "",
 "QuestSlot": ""
 }
@@ -101,6 +107,10 @@ _global_script_class_icons={
 config/name="Shadow World"
 run/main_scene="res://scenes/grass_lands/management/level.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+global_info="*res://scripts/general/management/global_info.gd"
 
 [display]
 

@@ -7,6 +7,7 @@ onready var texture: Sprite = get_node("Texture")
 var attack_damage: int
 
 var can_move: bool = true
+var is_alive: bool = true
 
 var velocity: Vector2 = Vector2.ZERO
 
@@ -42,3 +43,7 @@ func sleep(state: bool) -> void:
 	velocity = Vector2.ZERO
 	texture.animate(velocity)
 	set_physics_process(state)
+	
+	
+func kill() -> void:
+	print("Dead")

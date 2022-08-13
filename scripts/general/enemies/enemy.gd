@@ -25,7 +25,7 @@ func _physics_process(_delta: float) -> void:
 	
 	
 func move() -> void:
-	if not player_ref:
+	if not player_ref or not global_info.is_alive:
 		velocity = Vector2.ZERO
 		return
 		

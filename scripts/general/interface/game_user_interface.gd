@@ -22,16 +22,21 @@ func spawn_container(container_scene: PackedScene):
 	
 	
 func _process(_delta: float) -> void:
+	if not global_info.is_alive:
+		return
+		
 	handle_quest_container()
 	
 	
 func handle_quest_container() -> void:
 	var on_action: bool = quest_container.on_action
 	if Input.is_action_just_pressed("ui_quest") and not on_action:
+		global_info.is_on_menu = true
 		quest_container.play_animation("show_container")
 		return
 		
 	if Input.is_action_just_pressed("ui_quest") and on_action:
+		global_info.is_on_menu = false
 		quest_container.play_animation("hide_container")
 		return
 		
