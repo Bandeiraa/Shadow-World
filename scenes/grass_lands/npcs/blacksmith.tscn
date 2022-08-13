@@ -879,7 +879,7 @@ texture = ExtResource( 1 )
 position = Vector2( 167, 48 )
 frames = SubResource( 26 )
 animation = "idle"
-frame = 7
+frame = 15
 playing = true
 
 [node name="Wall" type="Sprite" parent="Art"]
@@ -898,7 +898,7 @@ position = Vector2( 18, -82 )
 z_index = 2
 frames = SubResource( 43 )
 animation = "white_type_2"
-frame = 18
+frame = 15
 playing = true
 
 [node name="Bottom" type="AnimatedSprite" parent="Art/Forge"]

@@ -78,11 +78,6 @@ func on_animation_finished(anim_name: String) -> void:
 			get_tree().call_group("character", "sleep", false)
 			
 			
-func reset_slot_state() -> void:
-	for slot in quest_v_container.get_children():
-		slot.reset_state()
-		
-		
 func update_slot(target: String) -> void:
 	for slot in quest_v_container.get_children():
 		if slot.target == target:
@@ -95,3 +90,8 @@ func reset_slot(target: String) -> void:
 			slot.reset_slot()
 			
 	display_placeholder_text()
+	
+	
+func reset_slot_state() -> void:
+	for slot in quest_v_container.get_children():
+		slot.reset_state()
